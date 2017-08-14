@@ -128,29 +128,38 @@ console.log( 'The total number of transactions is:', totalTransactions );
 
   HINT(S):
   - Not all transactions are 'sales'.
-*/
-var numSales;
-
-/*
   Hey, welcome to the first question!
 
   Here's a breakdown of the question, and some pointers on how to get started!
-    - A variable has been declared a few lines above (`numSales`).
-    - Just below, the contents of the `numSales` variable are logged to the console.
-    - Your job is to assign the variable to the correct value (in this case: the total number of sales) *BEFORE* it is logged out.
-    - You can do this by:
-      - Adding an `=` sign (we are *assigning* something after all)
-      - Starting with the `transactions` variable (see the example question);
-      - Adding one or more methods to transform/extract the value we're looking for.
-      - If your solution is correct, `numSales` should be equal to 5.
+  - A variable has been declared a few lines above (`numSales`).
+  - Just below, the contents of the `numSales` variable are logged to the console.
+  - Your job is to assign the variable to the correct value (in this case: the total number of sales) *BEFORE* it is logged out.
+  - You can do this by:
+  - Adding an `=` sign (we are *assigning* something after all)
+  - Starting with the `transactions` variable (see the example question);
+  - Adding one or more methods to transform/extract the value we're looking for.
+  - If your solution is correct, `numSales` should be equal to 5.
 
   You can solve the remaining questions in the same way!
 
   P.S.
   The breakdown above takes up a lot of space, feel free to move it to the top or bottom of the file!
-*/
+  */
 
-console.log( 'The total number of sales is:', numSales );
+
+function findSales(transaction) {
+    return transaction.type === 'sale';
+}
+
+function filterSales() {
+    return transactions.filter(findSales);
+}
+
+var numSales = filterSales().length;
+console.log( 'The total number of sales is:', numSales);
+
+/*
+
 
 
 // --------------------------------------------------
@@ -159,8 +168,16 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
-var numPurchases;
 
+function findPurchases(transaction) {
+    return transaction.type === 'purchase';
+}
+
+function filterPurchases() {
+    return transactions.filter(findPurchases);
+}
+
+var numPurchases = filterPurchases().length;
 console.log( 'The total number of purchases is:', numPurchases );
 
 
@@ -173,8 +190,15 @@ console.log( 'The total number of purchases is:', numPurchases );
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
-var numCashSales;
+function findCashPurchases(transaction) {
+    return transaction.paymentMethod === 'cash';
+}
 
+function filterCashPurchases() {
+    return transactions.filter(findCashPurchases);
+}
+
+var numCashSales = filterCashPurchases().length;
 console.log( 'The total number of cash sales is:', numCashSales );
 
 
@@ -187,8 +211,15 @@ console.log( 'The total number of cash sales is:', numCashSales );
   HINT(S):
   - Make sure to exclude any 'sales' made by 'credit'!
 */
-var numCreditPurchases;
+function findCreditPurchases(transaction) {
+    return transaction.paymentMethod === 'credit';
+}
 
+function filterCreditPurchases() {
+    return transactions.filter(findCreditPurchases);
+}
+
+var numCreditPurchases = filterCreditPurchases().length;
 console.log( 'The total number of credit purchases is:', numCreditPurchases );
 
 
