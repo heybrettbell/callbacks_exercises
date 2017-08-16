@@ -235,8 +235,18 @@ console.log( 'The total number of credit purchases is:', numCreditPurchases );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - This array is allowed to contain duplicate values.
 */
-var uniqueVendors;
 
+function findVendors(transaction) {
+    return transaction.vendor;
+}
+function filterVendors() {
+  return transactions.filter(findVendors);
+}
+function transactionToVendor(transaction) {
+  return transaction.vendor;
+}
+
+var uniqueVendors = filterVendors().map(transactionToVendor);
 console.log( 'The unique vendors are:', uniqueVendors );
 
 
@@ -252,9 +262,32 @@ console.log( 'The unique vendors are:', uniqueVendors );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - Make sure that the resulting array *does not* include any duplicates.
 */
-var uniqueCustomers;
+// function findCustomers(transaction) {
+//     return transaction.customer;
+// }
+// function filterCustomers() {
+//   return transactions.filter(findCustomers);
+// }
+// function transactionToCustomer(transaction) {
+//   return transaction.customer;
+// }
+// var uniqueCustomers = filterCustomers().map(transactionToCustomer);
+//
+// console.log( 'The unique customers are:', uniqueCustomers );
 
-console.log( 'The unique customers are:', uniqueCustomers );
+var uniqueCustomers = [];
+
+
+transactions.forEach(function(transaction) {
+  if (transaction.customer && !uniqueCustomers.includes(transaction.customer)) {
+    uniqueCustomers.push(transaction.customer)
+  }});
+  console.log( 'The unique customers are:', uniqueCustomers );
+
+
+
+
+
 
 
 // --------------------------------------------------
@@ -270,8 +303,12 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders;
+var bigSpenders = [];
 
+transactions.forEach(function(transaction) {
+  if (transaction.items.length >= 5) {
+      bigSpenders.push(transaction.vendor || transaction.customer)
+  }});
 console.log( 'The "big spenders" are:', bigSpenders );
 
 
@@ -284,7 +321,18 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-var sumSales;
+
+// Get an array of checkout values only
+
+var totalSales = transactions.map(function(item) {
+    return item.items[item[0].key] = [item.value];
+});
+console.log(totalSales);
+
+// Sum the array's values from left to right
+var sumSales = totalSales.reduce(function(sum, item) {
+    return sum + item;
+}, 0);
 
 console.log( 'The sum of all sales is:', sumSales );
 
